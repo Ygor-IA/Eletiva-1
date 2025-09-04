@@ -11,10 +11,12 @@
 <h1>2. Subtração</h1>
 <form method="post">
 <div class="row inline-row mb-3"><div class="col-md-5">
-              <label for="num1" class="form-label">Digite um número</label>
+              <label for="num1" class="form-label">Digite um número: </label>
               <input type="number" id="num1" name="num1" class="form-control" required="">
             </div>
-            <div class="col-md-1"> - </div>
+            <div class="col-md-2 d-flex align-items-center justify-content-center">
+            <span style="font-size: 1.5rem;">-</span>
+            </div>
             <div class="col-md-5">
               <label for="num2" class="form-label">Digite um número: </label>
               <input type="number" id="num2" name="num2" class="form-control" required="">
