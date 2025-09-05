@@ -12,7 +12,7 @@
 <form method="post">
 <div class="mb-3">
               <label for="metros" class="form-label">Insira a quantidade de metros (m):</label>
-              <input type="number" id="metros" name="metros" class="form-control" required="">
+              <input type="number" id="metros" name="metros" class="form-control" required="" step="0.01">
             </div>
             <center>
 <button type="submit" class="btn btn-primary">Converter</button>

@@ -12,7 +12,7 @@
 <form method="post">
 <div class="mb-3">
               <label for="temp" class="form-label">Informe a temperatura em Celsius(ºC): </label>
-              <input type="number" id="temp" name="temp" class="form-control" required="">
+              <input type="number" id="temp" name="temp" class="form-control" required="" step="0.01">
             </div>
             <center>
 <button type="submit" class="btn btn-primary">Calcular</button>

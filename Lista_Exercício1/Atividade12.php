@@ -12,10 +12,10 @@
 <form method="post">
 <div class="row inline-row mb-3"><div class="col-md-6">
               <label for="base" class="form-label">Base:</label>
-              <input type="number" id="base" name="base" class="form-control" required="">
+              <input type="number" id="base" name="base" class="form-control" required="" step="0.01">
             </div><div class="col-md-6">
               <label for="exp" class="form-label">Expoente:</label>
-              <input type="number" id="exp" name="exp" class="form-control" required="">
+              <input type="number" id="exp" name="exp" class="form-control" required="" step="0.01">
             </div></div>
             <center>
 <button type="submit" class="btn btn-primary">Calcular Potência</button>

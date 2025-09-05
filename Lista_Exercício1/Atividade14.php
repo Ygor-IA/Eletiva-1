@@ -10,7 +10,7 @@
 <form method="post">
 <div class="mb-3">
               <label for="km" class="form-label">Insira a quantidade de quilômetros (km):</label>
-              <input type="number" id="km" name="km" class="form-control" required="">
+              <input type="number" id="km" name="km" class="form-control" required="" step="0.01">
             </div>
             <center>
 <button type="submit" class="btn btn-primary">Converter</button>

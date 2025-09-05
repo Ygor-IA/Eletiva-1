@@ -10,7 +10,7 @@
 <form method="post">
 <div class="mb-3">
               <label for="raio" class="form-label">Informe o raio do círculo: </label>
-              <input type="number" id="raio" name="raio" class="form-control" required="">
+              <input type="number" id="raio" name="raio" class="form-control" required="" step="0.01">
             </div>
             <center>
 <button type="submit" class="btn btn-primary">Calcular Área</button>
