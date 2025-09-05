@@ -9,7 +9,7 @@
 <h1>9. Área do Círculo </h1>
 <form method="post">
 <div class="mb-3">
-              <label for="temp" class="form-label">Informe o raio do círculo: </label>
+              <label for="raio" class="form-label">Informe o raio do círculo: </label>
               <input type="number" id="raio" name="raio" class="form-control" required="">
             </div>
             <center>
@@ -19,7 +19,7 @@
 </div>
 <Center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Área: " . (pi() * pow($_POST['raio'], 2));
 }
 ?>
