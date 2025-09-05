@@ -1,15 +1,28 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex6 - Celsius para Fahrenheit</title></head>
-<body>
-<h2>6. Converter Celsius para Fahrenheit</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Celsius -> Fahrenheit</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
+<h1>6. Celsius -> Fahrenheit</h1>
 <form method="post">
-    <input type="number" name="c" step="0.1" required> °C
-    <button type="submit">Converter</button>
+<div class="mb-3">
+              <label for="temp" class="form-label">Informe a temperatura em Celsius(ºC): </label>
+              <input type="number" id="temp" name="temp" class="form-control" required="">
+            </div>
+            <center>
+<button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</div>
+<Center>
 <?php
-if ($_POST) {
-    echo "Fahrenheit: " . (($_POST['c'] * 9/5) + 32);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "Fahrenheit: " . (($_POST['temp'] * 9/5) + 32);
 }
 ?>
 </body>

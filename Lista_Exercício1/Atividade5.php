@@ -27,7 +27,7 @@
 </div>
 <center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Média: " . (($_POST['nota1'] + $_POST['nota2'] + $_POST['nota3']) / 3);
 }
 ?>
