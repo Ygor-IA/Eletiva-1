@@ -21,7 +21,7 @@
 </div>
 <center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Centímetros: " . ($_POST['metros'] * 100) . " cm";
 }
 ?>
