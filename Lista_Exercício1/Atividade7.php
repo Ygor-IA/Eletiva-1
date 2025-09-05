@@ -21,7 +21,7 @@
 </div>
 <Center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo "Celsius: " . (($_POST['temp'] - 32) * 5/9);
 }
 ?>

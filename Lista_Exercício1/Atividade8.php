@@ -1,16 +1,31 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex8 - Área do Retângulo</title></head>
-<body>
-<h2>8. Área do retângulo</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Área do retângulo</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
+<h1>Área do retângulo</h1>
 <form method="post">
-    Largura: <input type="number" name="largura" required>
-    Altura: <input type="number" name="altura" required>
-    <button type="submit">Calcular</button>
+<div class="row inline-row mb-3"><div class="col-md-6">
+              <label for="larg" class="form-label">Largura: </label>
+              <input type="number" id="larg" name="larg" class="form-control" required="">
+            </div><div class="col-md-6">
+              <label for="alt" class="form-label">Altura: </label>
+              <input type="number" id="alt" name="alt" class="form-control" required="">
+            </div></div>
+            <center>
+<button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</div>
+<center>
 <?php
-if ($_POST) {
-    echo "Área: " . ($_POST['largura'] * $_POST['altura']);
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    echo "Área: " . ($_POST['larg'] * $_POST['alt']);
 }
 ?>
 </body>
