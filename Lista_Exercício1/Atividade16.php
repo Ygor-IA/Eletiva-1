@@ -8,17 +8,16 @@
 </head>
 <body> 
 <div class="container py-3">
-<h1>16. Preço com desconto</h1>
 <form method="post">
 <div class="row inline-row mb-3"><div class="col-md-6">
               <label for="preco" class="form-label">Preço:</label>
-              <input type="number" id="preco" name="preco" class="form-control" required="">
+              <input type="number" id="preco" name="preco" class="form-control" required="" step="0.01">
             </div><div class="col-md-6">
               <label for="desconto" class="form-label">Desconto (%):</label>
-              <input type="number" id="desconto" name="desconto" class="form-control" required="">
+              <input type="number" id="desconto" name="desc" class="form-control" required="" step="0.01">
             </div></div>
             <center>
-<button type="submit" class="btn btn-primary">Enviar</button>
+<button type="submit" class="btn btn-primary">Calcular</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </div>
