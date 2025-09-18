@@ -20,7 +20,7 @@
 </div>
 <center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $n = $_POST['n']; $i=1; $soma=0;
     while ($i <= $n) {
         $soma += $i;
