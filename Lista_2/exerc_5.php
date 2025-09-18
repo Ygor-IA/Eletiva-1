@@ -1,17 +1,29 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex5</title></head>
-<body>
-<h2>5. Nome do mês</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>5. Nome do mês</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
 <form method="post">
-    Mês (1 a 12): <input type="number" name="mes" min="1" max="12" required>
-    <button type="submit">Verificar</button>
+<div class="row inline-row mb-3"><div class="col-md-12">
+              <label for="mes" class="form-label">Informe o Mês (1 a 12):</label>
+              <input type="number" id="mes" name="mes" class="form-control" required="">
+            </div></div>
+            <center>
+<button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</div>
+<center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $mes = $_POST['mes'];
     switch($mes) {
-        case 1: $nome="Janeiro"; break;
+        case 1: $nome="Janeiro"; break; 
         case 2: $nome="Fevereiro"; break;
         case 3: $nome="Março"; break;
         case 4: $nome="Abril"; break;
