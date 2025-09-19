@@ -1,20 +1,34 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex3</title></head>
-<body>
-<h2>3. Verificar se uma palavra está contida na outra</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Verificar se uma palavra está contida na outra</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
 <form method="post">
-    Palavra 1: <input type="text" name="p1" required><br>
-    Palavra 2: <input type="text" name="p2" required><br>
-    <button type="submit">Verificar</button>
+<div class="row inline-row mb-3"><div class="col-md-6">
+              <label for="p1" class="form-label">Informe uma palavra:</label>
+              <input type="text" id="p1" name="p1" class="form-control" required="">
+            </div><div class="col-md-6">
+              <label for="p2" class="form-label">Informe uma palavra:</label>
+              <input type="text" id="p2" name="p2" class="form-control" required="">
+            </div></div>
+            <center>
+<button type="submit" class="btn btn-primary">Verificar</button>
 </form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</div>
+</form>
+<center>
 <?php
 function verificarSubstring($texto, $sub) {
-    // função interna: strpos()
     return strpos($texto, $sub) !== false;
 }
 
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $p1 = $_POST['p1'];
     $p2 = $_POST['p2'];
     if (verificarSubstring($p1, $p2)) {
