@@ -13,8 +13,9 @@
               <label for="mes" class="form-label">Informe o Mês (1 a 12):</label>
               <input type="number" id="mes" name="mes" class="form-control" required="">
             </div></div>
-            <center>
-<button type="submit" class="btn btn-primary">Enviar</button>
+            <div class="d-flex justify-content-center">
+<button type="submit" class="btn btn-primary">Verificar</button>
+</div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </div>

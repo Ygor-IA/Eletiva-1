@@ -13,8 +13,9 @@
               <label for="n" class="form-label">Informe um número:</label>
               <input type="number" id="n" name="n" class="form-control" required="">
             </div></div>
-            <center>
-    <button type="submit" class="btn btn-primary">Calcular</button>
+            <div class="d-flex justify-content-center">
+<button type="submit" class="btn btn-primary">Verificar</button>
+</div>
 </form>
 <Center>
 <?php

@@ -16,7 +16,9 @@
             </div>
         <?php endfor; ?>
     </div>
+    <div class="d-flex justify-content-center">
 <button type="submit" class="btn btn-primary">Verificar</button>
+</div>
 </form>
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -13,8 +13,9 @@
               <label for="valor" class="form-label">Valor do Produto: </label>
               <input type="number" id="valor" name="valor" class="form-control" required="">
             </div></div>
-            <center>
+            <div class="d-flex justify-content-center">
 <button type="submit" class="btn btn-primary">Calcular</button>
+</div>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </div>
