@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex10</title></head>
-<body>
-<h2>10. Tabuada de N</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10. Tabuada de N</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
 <form method="post">
-    Número: <input type="number" name="n" required>
-    <button type="submit">Gerar</button>
+<div class="row inline-row mb-3"><div class="col-md-12">
+              <label for="n" class="form-label">Informe um número:</label>
+              <input type="number" id="n" name="n" class="form-control" required="">
+            </div></div>
+            <center>
+    <button type="submit" class="btn btn-primary">Calcular</button>
 </form>
+<Center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $n = $_POST['n'];
     for ($i=1; $i<=10; $i++) {
         echo "$n x $i = " . ($n*$i) . "<br>";
