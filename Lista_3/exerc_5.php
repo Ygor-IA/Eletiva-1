@@ -11,7 +11,7 @@
 <form method="post">
 <div class="row inline-row mb-3"><div class="col-md-12">
               <label for="num" class="form-label">Informe um Número:</label>
-              <input type="number" id="num" name="num" class="form-control" required="">
+              <input type="number" id="num" name="num" class="form-control" required="" step="0.01">
             </div></div>
             <div class="d-flex justify-content-center">
 <button type="submit" class="btn btn-primary">Calcular</button>
