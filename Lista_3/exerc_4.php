@@ -27,7 +27,6 @@
 </div>
 <?php
 function verificarData($d, $m, $a) {
-    // função interna: checkdate()
     if (checkdate($m, $d, $a)) {
         return sprintf("%02d/%02d/%04d", $d, $m, $a);
     } else {
