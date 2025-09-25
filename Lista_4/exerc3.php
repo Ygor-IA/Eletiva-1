@@ -1,8 +1,13 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head><meta charset="UTF-8"><title>Ex3 - Produtos</title></head>
-<body>
-<h2>3. Lista de produtos</h2>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3. Lista de Produtos</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+<body> 
+<div class="container py-3">
 <form method="post">
     <?php for ($i=1; $i<=5; $i++): ?>
         <h3>Produto <?= $i ?></h3>
