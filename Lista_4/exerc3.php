@@ -30,7 +30,7 @@
 </div>
 <center>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $produtos = [];
     for ($i=0; $i<5; $i++) {
         $preco = $_POST['preco'][$i];

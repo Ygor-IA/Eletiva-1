@@ -12,7 +12,7 @@
     <button type="submit">Salvar</button>
 </form>
 <?php
-if ($_POST) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $livros = [];
     for ($i=0; $i<5; $i++) {
         $livros[$_POST['titulo'][$i]] = $_POST['estoque'][$i];
