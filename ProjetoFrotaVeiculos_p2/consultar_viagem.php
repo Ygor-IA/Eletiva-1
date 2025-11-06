@@ -2,7 +2,6 @@
     require("cabecalho.php");
     require("conexao.php");
 
-    // Lógica para Excluir (POST)
     if($_SERVER['REQUEST_METHOD'] == "POST" && isset($_POST['id'])){
         $id = $_POST['id'];
         try {
@@ -15,11 +14,9 @@
         }
     }
 
-    // Lógica para Carregar Dados (GET)
     if(isset($_GET['id'])){
         $id = $_GET['id'];
         try{
-            // Query complexa para mostrar os nomes, e não apenas os IDs
             $stmt = $pdo->prepare("
                 SELECT 
                     vi.id, vi.data_viagem, 
@@ -34,49 +31,54 @@
             ");
             $stmt->execute([$id]);
             $viagem = $stmt->fetch(PDO::FETCH_ASSOC);
-            if(!$viagem){
-                die("Viagem não encontrada!");
-            }
+            if(!$viagem){ die("Viagem não encontrada!"); }
              $viagem['data_viagem'] = date('d/m/Y H:i', strtotime($viagem['data_viagem']));
 
-        } catch(Exception $e){
-            echo "Erro ao buscar dados: ".$e->getMessage();
-        }
-    } else {
-        die("ID não fornecido!");
-    }
+        } catch(Exception $e){ echo "Erro ao buscar dados: ".$e->getMessage(); }
+    } else { die("ID não fornecido!"); }
 ?>
 
-<h1>Confirmar Exclusão</h1>
-<p>Tem certeza que deseja excluir o seguinte registro de viagem?</p>
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-danger text-white">
+                <h1 class="h4 mb-0">Confirmar Exclusão</h1>
+            </div>
+            <div class="card-body">
+                <p>Tem certeza que deseja excluir o seguinte registro de viagem?</p>
+                <form method="post">
+                    <input type="hidden" name="id" value="<?= $viagem['id'] ?>">
 
-<form method="post">
-    <input type="hidden" name="id" value="<?= $viagem['id'] ?>">
+                    <div class="mb-3">
+                        <label for="data_viagem" class="form-label">Data e Hora</label>
+                        <input type="text" id="data_viagem" class="form-control" 
+                               value="<?= $viagem['data_viagem'] ?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="veiculo_desc" class="form-label">Veículo</label>
+                        <input type="text" id="veiculo_desc" class="form-control" 
+                               value="<?= $viagem['veiculo_desc'] ?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="motorista_nome" class="form-label">Motorista</label>
+                        <input type="text" id="motorista_nome" class="form-control" 
+                               value="<?= $viagem['motorista_nome'] ?>" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label for="rota_desc" class="form-label">Rota</label>
+                        <input type="text" id="rota_desc" class="form-control" 
+                               value="<?= $viagem['rota_desc'] ?>" disabled>
+                    </div>
 
-    <div class="mb-3">
-        <label for="data_viagem" class="form-label">Data e Hora</label>
-        <input type="text" id="data_viagem" class="form-control" 
-               value="<?= $viagem['data_viagem'] ?>" disabled>
+                    <div class="d-flex justify-content-between">
+                        <a href="viagens.php" class="btn btn-secondary">Voltar</a>
+                        <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="mb-3">
-        <label for="veiculo_desc" class="form-label">Veículo</label>
-        <input type="text" id="veiculo_desc" class="form-control" 
-               value="<?= $viagem['veiculo_desc'] ?>" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="motorista_nome" class="form-label">Motorista</label>
-        <input type="text" id="motorista_nome" class="form-control" 
-               value="<?= $viagem['motorista_nome'] ?>" disabled>
-    </div>
-    <div class="mb-3">
-        <label for="rota_desc" class="form-label">Rota</label>
-        <input type="text" id="rota_desc" class="form-control" 
-               value="<?= $viagem['rota_desc'] ?>" disabled>
-    </div>
-
-    <a href="viagens.php" class="btn btn-secondary">Voltar</a>
-    <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>
-</form>
+</div>
 
 <?php
     require("rodape.php");
