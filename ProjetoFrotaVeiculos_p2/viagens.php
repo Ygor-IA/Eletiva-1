@@ -20,10 +20,10 @@
         echo "Erro: ".$e->getMessage();
     }
 
-    if (isset($_GET['cadastro']) && $_GET['cadastro']){
-        echo "<p class='text-success'>Cadastro realizado!</p>";
-    } else if (isset($_GET['cadastro']) && !$_GET['cadastro']){
-        echo "<p class='text-danger'>Erro ao cadastrar!</p>";
+    if (isset($_GET['excluir']) && $_GET['excluir']){
+        echo "<p class='text-success'>Registro excluído!</p>";
+    } else if (isset($_GET['excluir']) && !$_GET['excluir']){
+        echo "<p class='text-danger'>Erro ao excluir!</p>";
     }
 ?>
 
@@ -52,6 +52,7 @@
             <td><?= $d['cidade_inicio'] ?> -> <?= $d['cidade_fim'] ?></td>
             <td class="d-flex gap-2 no-print">
                 <a href="editar_viagem.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <a href="consultar_viagem.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-danger">Excluir</a>
             </td>
         </tr>
         <?php

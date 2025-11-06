@@ -11,8 +11,11 @@
 
     if (isset($_GET['cadastro']) && $_GET['cadastro']){
         echo "<p class='text-success'>Cadastro realizado!</p>";
-    } else if (isset($_GET['cadastro']) && !$_GET['cadastro']){
-        echo "<p class='text-danger'>Erro ao cadastrar!</p>";
+    } // ... (outras mensagens de GET) ...
+    if (isset($_GET['excluir']) && $_GET['excluir']){
+        echo "<p class='text-success'>Registro excluído!</p>";
+    } else if (isset($_GET['excluir']) && !$_GET['excluir']){
+        echo "<p class='text-danger'>Erro ao excluir! Verifique se o registro está sendo usado em outra parte do sistema.</p>";
     }
 ?>
 
@@ -37,6 +40,7 @@
             <td><?= $d['cnh'] ?></td>
             <td class="d-flex gap-2 no-print">
                 <a href="editar_motorista.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <a href="consultar_motorista.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-danger">Excluir</a>
             </td>
         </tr>
         <?php

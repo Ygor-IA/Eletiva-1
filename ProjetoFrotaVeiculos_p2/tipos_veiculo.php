@@ -14,6 +14,11 @@
     } else if (isset($_GET['cadastro']) && !$_GET['cadastro']){
         echo "<p class='text-danger'>Erro ao cadastrar!</p>";
     }
+    if (isset($_GET['excluir']) && $_GET['excluir']){
+        echo "<p class='text-success'>Registro excluído!</p>";
+    } else if (isset($_GET['excluir']) && !$_GET['excluir']){
+        echo "<p class='text-danger'>Erro ao excluir! Verifique se o registro está sendo usado em outra parte do sistema.</p>";
+    }
 ?>
 
 <h2>Tipos de Veículo</h2>
@@ -34,7 +39,8 @@
             <td><?= $d['id'] ?></td>
             <td><?= $d['nome'] ?></td>
             <td class="d-flex gap-2 no-print">
-                <a href="#" class="btn btn-sm btn-warning">Editar</a>
+                <a href="editar_tipo_veiculo.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <a href="consultar_tipo_veiculo.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-danger">Excluir</a>
             </td>
         </tr>
         <?php
@@ -42,7 +48,6 @@
         ?>
     </tbody>
 </table>
-
 
 <?php
 require("rodape.php");
