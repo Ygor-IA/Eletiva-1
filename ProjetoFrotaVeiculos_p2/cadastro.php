@@ -26,7 +26,7 @@
     </form>
     <p class="mt-3">
       Já tem uma conta? 
-      <a href="login.php">Faça login aqui</a>
+      <a href="index.php">Faça login aqui</a>
     </p>
   </div>
   <?php

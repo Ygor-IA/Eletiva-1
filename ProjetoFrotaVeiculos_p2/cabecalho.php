@@ -23,7 +23,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark no-print">
     <div class="container">
-      <a class="navbar-brand" href="principal.php">Sistema</a>
+      <a class="navbar-brand" href="principal.php">Sistema Frota</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Alternar navegação">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -35,14 +35,21 @@
           </li>
 
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="dropdown2" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="#" id="dropdownCadastros" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Cadastros
             </a>
-            <ul class="dropdown-menu" aria-labelledby="dropdown2">
-              <li><a class="dropdown-item" href="categorias.php">Categorias de Produtos</a></li>
-              <li><a class="dropdown-item" href="produtos.php">Produtos</a></li>
+            <ul class="dropdown-menu" aria-labelledby="dropdownCadastros">
+              <li><a class="dropdown-item" href="tipos_veiculo.php">Tipos de Veículos</a></li>
+              <li><a class="dropdown-item" href="veiculos.php">Veículos (RF1)</a></li>
+              <li><a class="dropdown-item" href="motoristas.php">Motoristas (RF2)</a></li>
+              <li><a class="dropdown-item" href="rotas.php">Rotas (RF3)</a></li>
             </ul>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="viagens.php">Registrar Viagens (RF4)</a>
+          </li>
+
         </ul>
       </div>
     </div>

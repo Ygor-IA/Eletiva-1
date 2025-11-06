@@ -3,8 +3,9 @@
     require("conexao.php");
 
     try{
-        $stmt = $pdo->query("SELECT c.nome, p.* FROM produto p
-                            INNER JOIN categoria c ON c.id = p.categoria_id");
+        // Junta veiculo (produto) com tipo_veiculo (categoria)
+        $stmt = $pdo->query("SELECT t.nome AS tipo_nome, v.* FROM veiculo v
+                            INNER JOIN tipo_veiculo t ON t.id = v.tipo_veiculo_id");
         $dados = $stmt->fetchAll();
     } catch(\Exception $e){
         echo "Erro: ".$e->getMessage();
@@ -27,12 +28,12 @@
     }
 ?>
 
-<h2>Produtos</h2>
-<a href="novo_produto.php" class="btn btn-success mb-3 no-print">Novo Registro</a>
+<h2>Veículos (RF1)</h2>
+<a href="novo_veiculo.php" class="btn btn-success mb-3 no-print">Novo Registro</a>
 <table class="table table-hover table-striped">
     <thead>
         <tr>
-            <th colspan="3">Dados dos Produtos</th>
+            <th colspan="5">Dados dos Veículos</th>
             <th class="no-print">
                 <button class="btn btn-secondary" onclick="window.print()">
                     Imprimir
@@ -41,8 +42,10 @@
         </tr>
         <tr>
             <th>ID</th>
-            <th>Descrição</th>
-            <th>Categoria</th>
+            <th>Placa</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+            <th>Tipo</th>
             <th class="no-print">Ações</th>
         </tr>
     </thead>
@@ -52,11 +55,13 @@
         ?>
         <tr>
             <td><?= $d['id'] ?></td>
-            <td><?= $d['descricao'] ?></td>
-            <td><?= $d['nome'] ?></td>
+            <td><?= $d['placa'] ?></td>
+            <td><?= $d['modelo'] ?></td>
+            <td><?= $d['ano'] ?></td>
+            <td><?= $d['tipo_nome'] ?></td>
             <td class="d-flex gap-2 no-print">
-                <a href="editar_produto.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
-                <a href="consultar_produto.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-info">Consultar</a>
+                <a href="editar_veiculo.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">Editar</a>
+                <a href="consultar_veiculo.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-info">Consultar</a>
             </td>
         </tr>
         <?php
