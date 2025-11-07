@@ -27,7 +27,7 @@
     }
 ?>
 
-<h2>Rotas (RF3)</h2>
+<h2>Rotas</h2>
 <a href="novo_rota.php" class="btn btn-success mb-3 no-print">Novo Registro</a>
 <table class="table table-hover table-striped">
     <thead>
