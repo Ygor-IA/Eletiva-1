@@ -99,7 +99,7 @@
       <div class="col">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title">Veículos (RF1)</h5>
+            <h5 class="card-title">Veículos</h5>
             <p class="card-text">Gerencie os veículos da frota, incluindo placas, modelos e tipos.</p>
           </div>
           <div class="card-footer bg-white border-0">
@@ -111,7 +111,7 @@
       <div class="col">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title">Motoristas (RF2)</h5>
+            <h5 class="card-title">Motoristas</h5>
             <p class="card-text">Cadastre e edite as informações dos motoristas da empresa.</p>
           </div>
           <div class="card-footer bg-white border-0">
@@ -123,7 +123,7 @@
       <div class="col">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title">Rotas (RF3)</h5>
+            <h5 class="card-title">Rotas</h5>
             <p class="card-text">Defina as rotas (origem e destino) que serão utilizadas nas viagens.</p>
           </div>
           <div class="card-footer bg-white border-0">
@@ -135,7 +135,7 @@
       <div class="col">
         <div class="card h-100 shadow-sm">
           <div class="card-body">
-            <h5 class="card-title">Viagens (RF4)</h5>
+            <h5 class="card-title">Viagens</h5>
             <p class="card-text">Registre e gerencie as viagens da frota.</p>
           </div>
           <div class="card-footer bg-white border-0">
