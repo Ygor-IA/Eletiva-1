@@ -13,7 +13,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      background-color: #f8f9fa; /* Um cinza claro de fundo */
+      background-color: #f8f9fa;
     }
     @media print {
       .no-print{
@@ -41,9 +41,9 @@
             </a>
             <ul class="dropdown-menu" aria-labelledby="dropdownCadastros">
               <li><a class="dropdown-item" href="tipos_veiculo.php">Tipos de Veículos</a></li>
-              <li><a class="dropdown-item" href="veiculos.php">Veículos (RF1)</a></li>
-              <li><a class="dropdown-item" href="motoristas.php">Motoristas (RF2)</a></li>
-              <li><a class="dropdown-item" href="rotas.php">Rotas (RF3)</a></li>
+              <li><a class="dropdown-item" href="veiculos.php">Veículos</a></li>
+              <li><a class="dropdown-item" href="motoristas.php">Motoristas</a></li>
+              <li><a class="dropdown-item" href="rotas.php">Rotas</a></li>
             </ul>
           </li>
           <li class="nav-item">

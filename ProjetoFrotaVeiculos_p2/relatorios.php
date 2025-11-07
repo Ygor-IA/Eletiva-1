@@ -124,9 +124,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // #################################################################
     // ####   SCRIPT DO GRÁFICO 1 (ROTAS) - DADOS DINÂMICOS   ####
-    // #################################################################
     const labelsRotas = <?php echo $json_labels_rotas; ?>;
     const dataRotas = <?php echo $json_data_rotas; ?>;
 
@@ -147,9 +145,7 @@
         }
     });
 
-    // ######################################################################
     // ####   SCRIPT DO GRÁFICO 2 (MOTORISTAS) - DADOS DINÂMICOS   ####
-    // ######################################################################
     const labelsMotoristas = <?php echo $json_labels_motoristas; ?>;
     const dataMotoristas = <?php echo $json_data_motoristas; ?>;
     
