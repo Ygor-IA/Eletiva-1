@@ -95,13 +95,63 @@
     <hr class="mb-4">
     
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+      
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Veículos (RF1)</h5>
+            <p class="card-text">Gerencie os veículos da frota, incluindo placas, modelos e tipos.</p>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <a href="veiculos.php" class="btn btn-primary w-100">Gerenciar Veículos</a>
+          </div>
+        </div>
       </div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Motoristas (RF2)</h5>
+            <p class="card-text">Cadastre e edite as informações dos motoristas da empresa.</p>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <a href="motoristas.php" class="btn btn-primary w-100">Gerenciar Motoristas</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Rotas (RF3)</h5>
+            <p class="card-text">Defina as rotas (origem e destino) que serão utilizadas nas viagens.</p>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <a href="rotas.php" class="btn btn-primary w-100">Gerenciar Rotas</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card h-100 shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title">Viagens (RF4)</h5>
+            <p class="card-text">Registre e gerencie as viagens da frota.</p>
+          </div>
+          <div class="card-footer bg-white border-0">
+            <a href="viagens.php" class="btn btn-success w-100">Gerenciar Viagens</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // #############################################################
     // ####   SCRIPT DO GRÁFICO 1 (VIAGENS) - DADOS DINÂMICOS   ####
     // #############################################################
+    
+    // Pega os dados 'impressos' pelo PHP
     const labelsViagens = <?php echo $json_labels_viagens; ?>;
     const dataViagens = <?php echo $json_data_viagens; ?>;
 
@@ -117,18 +167,25 @@
     
     // Renderiza o Gráfico de Linha
     const ctxViagens = document.getElementById('graficoViagensPorDia');
-    new Chart(ctxViagens, {
-        type: 'line',
-        data: dadosViagens,
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+    if (labelsViagens.length > 0) { // Só renderiza se houver dados
+        new Chart(ctxViagens, {
+            type: 'line',
+            data: dadosViagens,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    } else {
+        ctxViagens.parentNode.innerHTML = '<p class="text-center text-muted">Nenhuma viagem nos últimos 30 dias.</p>';
+    }
+
 
     // #############################################################
     // ####   SCRIPT DO GRÁFICO 2 (VEÍCULOS) - DADOS DINÂMICOS   ####
     // #############################################################
+    
+    // Pega os dados 'impressos' pelo PHP
     const labelsVeiculos = <?php echo $json_labels_veiculos; ?>;
     const dataVeiculos = <?php echo $json_data_veiculos; ?>;
 
@@ -150,14 +207,18 @@
 
     // Renderiza o Gráfico de Rosca (Doughnut)
     const ctxVeiculos = document.getElementById('graficoVeiculosMaisUsados');
-    new Chart(ctxVeiculos, {
-        type: 'doughnut',
-        data: dadosVeiculos,
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+    if (labelsVeiculos.length > 0) { // Só renderiza se houver dados
+        new Chart(ctxVeiculos, {
+            type: 'doughnut',
+            data: dadosVeiculos,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    } else {
+        ctxVeiculos.parentNode.innerHTML = '<p class="text-center text-muted">Nenhum veículo foi utilizado ainda.</p>';
+    }
 </script>
 
 <?php
