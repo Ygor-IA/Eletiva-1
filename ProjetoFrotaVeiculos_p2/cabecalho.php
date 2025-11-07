@@ -47,7 +47,10 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="viagens.php">Registrar Viagens (RF4)</a>
+            <a class="nav-link" aria-current="page" href="viagens.php">Viagens</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="relatorios.php">Relatórios</a>
           </li>
         </ul>
         
