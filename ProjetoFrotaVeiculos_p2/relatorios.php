@@ -2,21 +2,70 @@
     require("cabecalho.php");
     require("conexao.php"); // FUNDAMENTAL: Precisamos nos conectar ao BD
 
-    // --- Bloco PHP para buscar dados dos gráficos ---
+    // --- Bloco PHP para buscar dados dos Filtros ---
+    $lista_motoristas = [];
+    $lista_veiculos = [];
+    try {
+        $lista_motoristas = $pdo->query("SELECT id, nome FROM motorista ORDER BY nome ASC")->fetchAll();
+        $lista_veiculos = $pdo->query("SELECT id, placa, modelo FROM veiculo ORDER BY placa ASC")->fetchAll();
+    } catch(Exception $e) {
+        echo "Erro ao buscar dados dos filtros: ".$e->getMessage();
+    }
+
+    // --- Bloco PHP para processar os Filtros (via GET) ---
+    
+    // 1. Define os valores padrão
+    $filtro_data_inicio = $_GET['filtroDataInicio'] ?? '';
+    $filtro_data_fim = $_GET['filtroDataFim'] ?? '';
+    $filtro_motorista_id = $_GET['filtroMotorista'] ?? '';
+    $filtro_veiculo_id = $_GET['filtroVeiculo'] ?? '';
+
+    // 2. Monta a cláusula WHERE dinâmica para o SQL
+    $where_conditions = [];
+    $where_params = [];
+
+    if (!empty($filtro_data_inicio)) {
+        $where_conditions[] = "vi.data_viagem >= ?";
+        $where_params[] = $filtro_data_inicio . ' 00:00:00';
+    }
+    if (!empty($filtro_data_fim)) {
+        $where_conditions[] = "vi.data_viagem <= ?";
+        $where_params[] = $filtro_data_fim . ' 23:59:59';
+    }
+    if (!empty($filtro_motorista_id)) {
+        $where_conditions[] = "vi.motorista_id = ?";
+        $where_params[] = $filtro_motorista_id;
+    }
+    if (!empty($filtro_veiculo_id)) {
+        $where_conditions[] = "vi.veiculo_id = ?";
+        $where_params[] = $filtro_veiculo_id;
+    }
+
+    // Combina todas as condições com "AND"
+    $where_sql = "";
+    if (!empty($where_conditions)) {
+        $where_sql = " WHERE " . implode(" AND ", $where_conditions);
+    }
+
+    // --- Bloco PHP para buscar dados dos Gráficos (AGORA COM FILTROS) ---
     
     // 1. GRÁFICO DE VIAGENS POR ROTA
     $labels_rotas = [];
     $data_rotas = [];
     try {
-        $stmt = $pdo->query("
+        // SQL agora inclui a cláusula $where_sql
+        $sql = "
             SELECT 
                 CONCAT(r.cidade_inicio, ' -> ', r.cidade_fim) as rota, 
                 COUNT(*) as total 
             FROM viagem vi
             JOIN rota r ON vi.rota_id = r.id
+            $where_sql 
             GROUP BY rota
             ORDER BY total DESC
-        ");
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($where_params); // Executa com os parâmetros
         $dados_rotas_bruto = $stmt->fetchAll();
         
         foreach($dados_rotas_bruto as $d) {
@@ -27,20 +76,24 @@
         echo "Erro ao buscar dados do gráfico de rotas: ".$e->getMessage();
     }
     
-    // 2. GRÁFICO DE ATIVIDADE POR MOTORISTA (TOP 5)
+    // 2. GRÁFICO DE ATIVIDADE POR MOTORISTA
     $labels_motoristas = [];
     $data_motoristas = [];
     try {
-        $stmt = $pdo->query("
+        // SQL agora inclui a cláusula $where_sql
+        $sql = "
             SELECT 
                 m.nome, 
                 COUNT(*) as total 
             FROM viagem vi
             JOIN motorista m ON vi.motorista_id = m.id
+            $where_sql
             GROUP BY m.nome 
             ORDER BY total DESC
-            LIMIT 5
-        ");
+            LIMIT 10
+        ";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($where_params); // Executa com os parâmetros
         $dados_motoristas_bruto = $stmt->fetchAll();
         
         foreach($dados_motoristas_bruto as $d) {
@@ -73,31 +126,46 @@
             <h2 class="h5 mb-0">Filtrar Relatórios</h2>
         </div>
         <div class="card-body">
-            <form>
+            <form action="relatorios.php" method="GET">
                 <div class="row g-3">
                     <div class="col-md-3">
                         <label for="filtroDataInicio" class="form-label">Data Início</label>
-                        <input type="date" class="form-control" id="filtroDataInicio">
+                        <input type="date" class="form-control" id="filtroDataInicio" name="filtroDataInicio" 
+                               value="<?= htmlspecialchars($filtro_data_inicio) ?>">
                     </div>
                     <div class="col-md-3">
                         <label for="filtroDataFim" class="form-label">Data Fim</label>
-                        <input type="date" class="form-control" id="filtroDataFim">
+                        <input type="date" class="form-control" id="filtroDataFim" name="filtroDataFim"
+                               value="<?= htmlspecialchars($filtro_data_fim) ?>">
                     </div>
                     <div class="col-md-3">
                         <label for="filtroMotorista" class="form-label">Motorista</label>
-                        <select id="filtroMotorista" class="form-select">
-                            <option selected>Todos...</option>
+                        <select id="filtroMotorista" name="filtroMotorista" class="form-select">
+                            <option value="">Todos...</option>
+                            <?php foreach($lista_motoristas as $motorista): ?>
+                                <?php $selected = ($motorista['id'] == $filtro_motorista_id) ? 'selected' : ''; ?>
+                                <option value="<?= $motorista['id'] ?>" <?= $selected ?>>
+                                    <?= htmlspecialchars($motorista['nome']) ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="col-md-3">
                         <label for="filtroVeiculo" class="form-label">Veículo</label>
-                        <select id="filtroVeiculo" class="form-select">
-                            <option selected>Todos...</option>
+                        <select id="filtroVeiculo" name="filtroVeiculo" class="form-select">
+                            <option value="">Todos...</option>
+                             <?php foreach($lista_veiculos as $veiculo): ?>
+                                <?php $selected = ($veiculo['id'] == $filtro_veiculo_id) ? 'selected' : ''; ?>
+                                <option value="<?= $veiculo['id'] ?>" <?= $selected ?>>
+                                    <?= htmlspecialchars($veiculo['placa']) ?> (<?= htmlspecialchars($veiculo['modelo']) ?>)
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                 </div>
                 <hr>
                 <button type="submit" class="btn btn-primary">Gerar Relatório</button>
+                <a href="relatorios.php" class="btn btn-outline-secondary">Limpar Filtros</a>
             </form>
         </div>
     </div>
@@ -113,7 +181,7 @@
         </div>
         <div class="col-md-12">
             <div class="card shadow-sm">
-                <div class="card-header">Top 5 Motoristas Mais Ativos</div>
+                <div class="card-header">Relatório de Atividade por Motorista</div>
                 <div class="card-body">
                      <canvas id="graficoAtividadeMotorista" style="height: 300px;"></canvas>
                 </div>
@@ -124,48 +192,63 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    // #################################################################
     // ####   SCRIPT DO GRÁFICO 1 (ROTAS) - DADOS DINÂMICOS   ####
+    // #################################################################
     const labelsRotas = <?php echo $json_labels_rotas; ?>;
     const dataRotas = <?php echo $json_data_rotas; ?>;
 
     const ctxDetalhado = document.getElementById('graficoViagensPorRota');
-    new Chart(ctxDetalhado, {
-        type: 'bar',
-        data: {
-            labels: labelsRotas,
-            datasets: [{
-                label: 'Nº de Viagens',
-                data: dataRotas,
-                backgroundColor: 'rgba(54, 162, 235, 0.6)'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false
-        }
-    });
+    if (labelsRotas.length > 0) {
+        new Chart(ctxDetalhado, {
+            type: 'bar',
+            data: {
+                labels: labelsRotas,
+                datasets: [{
+                    label: 'Nº de Viagens',
+                    data: dataRotas,
+                    backgroundColor: 'rgba(54, 162, 235, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false
+            }
+        });
+    } else {
+        ctxDetalhado.parentNode.innerHTML = '<p class="text-center text-muted">Nenhum dado encontrado para os filtros selecionados.</p>';
+    }
 
+    // ######################################################################
     // ####   SCRIPT DO GRÁFICO 2 (MOTORISTAS) - DADOS DINÂMICOS   ####
+    // ######################################################################
     const labelsMotoristas = <?php echo $json_labels_motoristas; ?>;
     const dataMotoristas = <?php echo $json_data_motoristas; ?>;
     
     const ctxMotorista = document.getElementById('graficoAtividadeMotorista');
-    new Chart(ctxMotorista, {
-        type: 'bar',
-        data: {
-            labels: labelsMotoristas,
-            datasets: [{
-                label: 'Nº de Viagens',
-                data: dataMotoristas,
-                backgroundColor: 'rgba(255, 99, 132, 0.6)'
-            }]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            indexAxis: 'y', // Faz o gráfico ser de barras horizontais
+    if (labelsMotoristas.length > 0) {
+        new Chart(ctxMotorista, {
+            type: 'bar',
+            data: {
+                labels: labelsMotoristas,
+                datasets: [{
+                    label: 'Nº de Viagens',
+                    data: dataMotoristas,
+                    backgroundColor: 'rgba(255, 99, 132, 0.6)'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                indexAxis: 'y', // Faz o gráfico ser de barras horizontais
+            }
+        });
+    } else {
+        // Se o primeiro gráfico já mostrou a mensagem, este não precisa
+        if (labelsRotas.length === 0) {
+             ctxMotorista.parentNode.innerHTML = '<p class="text-center text-muted">Nenhum dado encontrado para os filtros selecionados.</p>';
         }
-    });
+    }
 </script>
 
 <?php
