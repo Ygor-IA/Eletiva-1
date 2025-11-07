@@ -32,7 +32,7 @@
     <div class="col-md-10 col-lg-8">
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white">
-                <h1 class="h4 mb-0">Editar Rota (RF3)</h1>
+                <h1 class="h4 mb-0">Editar Rota</h1>
             </div>
             <div class="card-body">
                 <form method="post">

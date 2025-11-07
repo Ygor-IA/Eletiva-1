@@ -28,7 +28,7 @@
     }
 ?>
 
-<h2>Veículos (RF1)</h2>
+<h2>Veículos</h2>
 <a href="novo_veiculo.php" class="btn btn-success mb-3 no-print">Novo Registro</a>
 <table class="table table-hover table-striped">
     <thead>

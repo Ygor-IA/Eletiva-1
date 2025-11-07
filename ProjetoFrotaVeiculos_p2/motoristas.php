@@ -19,7 +19,7 @@
     }
 ?>
 
-<h2>Motoristas (RF2)</h2>
+<h2>Motoristas</h2>
 <a href="novo_motorista.php" class="btn btn-success mb-3 no-print">Novo Registro</a>
 <table class="table table-hover table-striped">
     <thead>
