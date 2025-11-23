@@ -1,10 +1,7 @@
 <?php
     require("cabecalho.php");
-    require("conexao.php"); // FUNDAMENTAL: Precisamos nos conectar ao BD
+    require("conexao.php");
 
-    // --- Bloco PHP para buscar dados dos gráficos ---
-    
-    // 1. GRÁFICO DE VIAGENS POR DIA (ÚLTIMOS 30 DIAS)
     $labels_viagens = [];
     $data_viagens = [];
     try {
@@ -19,7 +16,6 @@
         ");
         $dados_viagens_bruto = $stmt->fetchAll();
         
-        // Formata os dados para o Chart.js
         foreach($dados_viagens_bruto as $d) {
             $labels_viagens[] = date('d/m', strtotime($d['dia'])); // Formata a data
             $data_viagens[] = $d['total'];
@@ -28,7 +24,6 @@
         echo "Erro ao buscar dados do gráfico de viagens: ".$e->getMessage();
     }
     
-    // 2. GRÁFICO DE VEÍCULOS MAIS USADOS (TOP 5)
     $labels_veiculos = [];
     $data_veiculos = [];
     try {
@@ -44,7 +39,6 @@
         ");
         $dados_veiculos_bruto = $stmt->fetchAll();
         
-        // Formata os dados
         foreach($dados_veiculos_bruto as $d) {
             $labels_veiculos[] = $d['placa'];
             $data_veiculos[] = $d['total'];
@@ -53,7 +47,6 @@
         echo "Erro ao buscar dados do gráfico de veículos: ".$e->getMessage();
     }
     
-    // Converte os arrays PHP para JSON para o JavaScript ler
     $json_labels_viagens = json_encode($labels_viagens);
     $json_data_viagens = json_encode($data_viagens);
     $json_labels_veiculos = json_encode($labels_veiculos);
@@ -147,11 +140,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // #############################################################
-    // ####   SCRIPT DO GRÁFICO 1 (VIAGENS) - DADOS DINÂMICOS   ####
-    // #############################################################
-    
-    // Pega os dados 'impressos' pelo PHP
+
     const labelsViagens = <?php echo $json_labels_viagens; ?>;
     const dataViagens = <?php echo $json_data_viagens; ?>;
 
@@ -165,9 +154,8 @@
         }]
     };
     
-    // Renderiza o Gráfico de Linha
     const ctxViagens = document.getElementById('graficoViagensPorDia');
-    if (labelsViagens.length > 0) { // Só renderiza se houver dados
+    if (labelsViagens.length > 0) { 
         new Chart(ctxViagens, {
             type: 'line',
             data: dadosViagens,
@@ -180,12 +168,6 @@
         ctxViagens.parentNode.innerHTML = '<p class="text-center text-muted">Nenhuma viagem nos últimos 30 dias.</p>';
     }
 
-
-    // #############################################################
-    // ####   SCRIPT DO GRÁFICO 2 (VEÍCULOS) - DADOS DINÂMICOS   ####
-    // #############################################################
-    
-    // Pega os dados 'impressos' pelo PHP
     const labelsVeiculos = <?php echo $json_labels_veiculos; ?>;
     const dataVeiculos = <?php echo $json_data_veiculos; ?>;
 
@@ -205,9 +187,8 @@
         }]
     };
 
-    // Renderiza o Gráfico de Rosca (Doughnut)
     const ctxVeiculos = document.getElementById('graficoVeiculosMaisUsados');
-    if (labelsVeiculos.length > 0) { // Só renderiza se houver dados
+    if (labelsVeiculos.length > 0) { 
         new Chart(ctxVeiculos, {
             type: 'doughnut',
             data: dadosVeiculos,

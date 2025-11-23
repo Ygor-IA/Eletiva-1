@@ -1,5 +1,4 @@
 <?php
-  // LÓGICA PHP VEM ANTES DE QUALQUER HTML
   if($_SERVER['REQUEST_METHOD'] == "POST"){
     require('conexao.php');
     $email = $_POST['email'];
@@ -13,7 +12,7 @@
         $_SESSION['acesso'] = true;
         $_SESSION['nome'] = $usuario['nome'];
         header('location: principal.php');
-        exit(); // Encerra o script após redirecionar
+        exit();
       } else {
         $erro_login = "Credenciais inválidas!";
       }
@@ -31,7 +30,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
     body {
-      background-color: #f0f2f5; /* Um fundo levemente cinza */
+      background-color: #f0f2f5;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -53,11 +52,9 @@
             <h2 class="h5 text-center mb-4">Acesso ao Sistema</h2>
             
             <?php
-              // Exibe mensagens de sucesso do cadastro
               if (isset($_GET['cadastro']) && $_GET['cadastro']) {
                 echo "<p class='alert alert-success'>Cadastro realizado com sucesso!</p>";
               }
-              // Exibe mensagens de erro do login
               if (isset($erro_login)) {
                 echo "<p class='alert alert-danger'>$erro_login</p>";
               }
