@@ -1,5 +1,4 @@
 <?php
-  // LÓGICA PHP VEM ANTES DE QUALQUER HTML
   if($_SERVER['REQUEST_METHOD'] == "POST"){
       require("conexao.php");
       $nome = $_POST['nome'];
@@ -9,12 +8,11 @@
           $stmt = $pdo->prepare("INSERT INTO usuario (nome, email, senha) VALUES (?, ?, ?)");
           if($stmt->execute([$nome, $email, $senha])){
               header("location: index.php?cadastro=true");
-              exit(); // Encerra o script
+              exit();
           } else{
               $erro_cadastro = "Erro ao realizar o cadastro!";
           }
       } catch(Exception $e){
-          // Verifica se é erro de e-mail duplicado (código 1062)
           if($e->getCode() == '23000' && str_contains($e->getMessage(), '1062')) {
                $erro_cadastro = "Este e-mail já está cadastrado!";
           } else {

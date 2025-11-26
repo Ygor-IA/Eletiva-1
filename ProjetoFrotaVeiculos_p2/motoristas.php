@@ -11,7 +11,7 @@
 
     if (isset($_GET['cadastro']) && $_GET['cadastro']){
         echo "<p class='text-success'>Cadastro realizado!</p>";
-    } // ... (outras mensagens de GET) ...
+    } 
     if (isset($_GET['excluir']) && $_GET['excluir']){
         echo "<p class='text-success'>Registro excluído!</p>";
     } else if (isset($_GET['excluir']) && !$_GET['excluir']){

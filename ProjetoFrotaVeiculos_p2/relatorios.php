@@ -1,8 +1,8 @@
 <?php
     require("cabecalho.php");
-    require("conexao.php"); // FUNDAMENTAL: Precisamos nos conectar ao BD
+    require("conexao.php");
 
-    // --- Bloco PHP para buscar dados dos Filtros ---
+
     $lista_motoristas = [];
     $lista_veiculos = [];
     try {
@@ -12,15 +12,11 @@
         echo "Erro ao buscar dados dos filtros: ".$e->getMessage();
     }
 
-    // --- Bloco PHP para processar os Filtros (via GET) ---
-    
-    // 1. Define os valores padrão
     $filtro_data_inicio = $_GET['filtroDataInicio'] ?? '';
     $filtro_data_fim = $_GET['filtroDataFim'] ?? '';
     $filtro_motorista_id = $_GET['filtroMotorista'] ?? '';
     $filtro_veiculo_id = $_GET['filtroVeiculo'] ?? '';
 
-    // 2. Monta a cláusula WHERE dinâmica para o SQL
     $where_conditions = [];
     $where_params = [];
 
@@ -41,19 +37,15 @@
         $where_params[] = $filtro_veiculo_id;
     }
 
-    // Combina todas as condições com "AND"
     $where_sql = "";
     if (!empty($where_conditions)) {
         $where_sql = " WHERE " . implode(" AND ", $where_conditions);
     }
 
-    // --- Bloco PHP para buscar dados dos Gráficos (AGORA COM FILTROS) ---
-    
-    // 1. GRÁFICO DE VIAGENS POR ROTA
     $labels_rotas = [];
     $data_rotas = [];
     try {
-        // SQL agora inclui a cláusula $where_sql
+    
         $sql = "
             SELECT 
                 CONCAT(r.cidade_inicio, ' -> ', r.cidade_fim) as rota, 
@@ -65,7 +57,7 @@
             ORDER BY total DESC
         ";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute($where_params); // Executa com os parâmetros
+        $stmt->execute($where_params); 
         $dados_rotas_bruto = $stmt->fetchAll();
         
         foreach($dados_rotas_bruto as $d) {
@@ -76,11 +68,10 @@
         echo "Erro ao buscar dados do gráfico de rotas: ".$e->getMessage();
     }
     
-    // 2. GRÁFICO DE ATIVIDADE POR MOTORISTA
+
     $labels_motoristas = [];
     $data_motoristas = [];
     try {
-        // SQL agora inclui a cláusula $where_sql
         $sql = "
             SELECT 
                 m.nome, 
@@ -93,7 +84,7 @@
             LIMIT 10
         ";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute($where_params); // Executa com os parâmetros
+        $stmt->execute($where_params); 
         $dados_motoristas_bruto = $stmt->fetchAll();
         
         foreach($dados_motoristas_bruto as $d) {
@@ -104,7 +95,6 @@
         echo "Erro ao buscar dados do gráfico de motoristas: ".$e->getMessage();
     }
     
-    // Converte para JSON
     $json_labels_rotas = json_encode($labels_rotas);
     $json_data_rotas = json_encode($data_rotas);
     $json_labels_motoristas = json_encode($labels_motoristas);
@@ -192,9 +182,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // #################################################################
-    // ####   SCRIPT DO GRÁFICO 1 (ROTAS) - DADOS DINÂMICOS   ####
-    // #################################################################
     const labelsRotas = <?php echo $json_labels_rotas; ?>;
     const dataRotas = <?php echo $json_data_rotas; ?>;
 
@@ -219,9 +206,6 @@
         ctxDetalhado.parentNode.innerHTML = '<p class="text-center text-muted">Nenhum dado encontrado para os filtros selecionados.</p>';
     }
 
-    // ######################################################################
-    // ####   SCRIPT DO GRÁFICO 2 (MOTORISTAS) - DADOS DINÂMICOS   ####
-    // ######################################################################
     const labelsMotoristas = <?php echo $json_labels_motoristas; ?>;
     const dataMotoristas = <?php echo $json_data_motoristas; ?>;
     
@@ -240,11 +224,10 @@
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                indexAxis: 'y', // Faz o gráfico ser de barras horizontais
+                indexAxis: 'y', 
             }
         });
     } else {
-        // Se o primeiro gráfico já mostrou a mensagem, este não precisa
         if (labelsRotas.length === 0) {
              ctxMotorista.parentNode.innerHTML = '<p class="text-center text-muted">Nenhum dado encontrado para os filtros selecionados.</p>';
         }

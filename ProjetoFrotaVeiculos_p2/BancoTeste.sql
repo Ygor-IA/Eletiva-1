@@ -4,15 +4,9 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
--- -----------------------------------------------------
--- Schema projetophp
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `projetophp` DEFAULT CHARACTER SET utf8 ;
 USE `projetophp` ;
 
--- -----------------------------------------------------
--- Table `projetophp`.`usuario` (LOGIN DO SISTEMA)
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`usuario` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(255) NOT NULL,
@@ -21,18 +15,12 @@ CREATE TABLE IF NOT EXISTS `projetophp`.`usuario` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `projetophp`.`tipo_veiculo` (Adaptado de 'categoria')
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`tipo_veiculo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `projetophp`.`veiculo` (RF1 - Adaptado de 'produto')
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`veiculo` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `placa` VARCHAR(10) NOT NULL,
@@ -48,9 +36,6 @@ CREATE TABLE IF NOT EXISTS `projetophp`.`veiculo` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `projetophp`.`motorista` (RF2 - Novo)
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`motorista` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(255) NOT NULL,
@@ -58,9 +43,6 @@ CREATE TABLE IF NOT EXISTS `projetophp`.`motorista` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `projetophp`.`rota` (RF3 - Novo)
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`rota` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `cidade_inicio` VARCHAR(100) NOT NULL,
@@ -70,9 +52,6 @@ CREATE TABLE IF NOT EXISTS `projetophp`.`rota` (
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
--- -----------------------------------------------------
--- Table `projetophp`.`viagem` (RF4 - Novo)
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `projetophp`.`viagem` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `data_viagem` DATETIME NOT NULL,

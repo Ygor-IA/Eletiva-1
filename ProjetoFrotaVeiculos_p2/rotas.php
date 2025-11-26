@@ -7,7 +7,7 @@
         $dados = $stmt->fetchAll();
     } catch(\Exception $e){
         echo "Erro: ".$e->getMessage();
-        $dados = []; // Garante que $dados seja um array para não quebrar o foreach
+        $dados = []; 
     }
 
     if (isset($_GET['cadastro']) && $_GET['cadastro']){

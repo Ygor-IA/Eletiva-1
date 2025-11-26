@@ -3,7 +3,6 @@
     require("conexao.php");
 
     try{
-        // Junta veiculo (produto) com tipo_veiculo (categoria)
         $stmt = $pdo->query("SELECT t.nome AS tipo_nome, v.* FROM veiculo v
                             INNER JOIN tipo_veiculo t ON t.id = v.tipo_veiculo_id");
         $dados = $stmt->fetchAll();
